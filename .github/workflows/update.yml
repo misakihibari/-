@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       full: {description: "全件取得し直す", type: boolean, default: false}
+      resummarize: {description: "要約だけ作り直す(再取得なし)", type: boolean, default: false}
       diagnose: {description: "診断(一覧ページの構造をログに出すだけ)", type: boolean, default: false}
 permissions: {contents: write}
 jobs:
@@ -14,7 +15,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: "3.11", cache: pip}
       - run: pip install -r requirements.txt
-      - run: python -m newsapp.update ${{ inputs.diagnose && '--diagnose' || inputs.full && '--full' || '' }}
+      - run: python -m newsapp.update ${{ inputs.diagnose && '--diagnose' || inputs.resummarize && '--resummarize' || inputs.full && '--full' || '' }}
         env: {ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}"}
       - name: commit
         run: |

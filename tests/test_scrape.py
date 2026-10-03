@@ -48,3 +48,12 @@ def test_short_ids_and_external_links():
     <a href="https://www.facebook.com/sharer/sharer.php?u=https://hd.gmotech.jp/news/14683/">share</a>"""
     items, _ = scrape.parse_list(html, "https://hd.gmotech.jp/news/page/7/")
     assert sorted(i["date"] for i in items) == ["2025-08-07", "2025-08-29"]
+
+
+def test_extractive_skips_header_and_title():
+    from newsapp.summarize import extractive
+    title = "GMO TECHとGMOトライハッチが合併 MEO事業を統合"
+    body = "\n".join(["2026年10月1日", "報道関係各位", "GMO TECHホールディングス株式会社", title,
+                      "GMO TECHとGMOトライハッチは本日、合併しました。両社の知見を結集します。"])
+    out = extractive(body, title)
+    assert out.startswith("GMO TECHとGMOトライハッチは本日") and "報道関係" not in out

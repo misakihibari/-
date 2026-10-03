@@ -74,10 +74,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--full", action="store_true")
     ap.add_argument("--diagnose", action="store_true")
+    ap.add_argument("--resummarize", action="store_true", help="保存済み本文から要約だけ作り直す(再取得なし)")
     args = ap.parse_args()
     if args.diagnose:
         return scrape.diagnose()
-    arts = sync_articles(args.full)
+    if args.resummarize:
+        arts = {a["url"]: a for a in load(NEWS, [])}
+        for a in arts.values():
+            a["summary"] = summarize.summarize_article(a["title"], a["body"])
+        GROUPS.unlink(missing_ok=True)  # 月・年の要約も作り直す
+    else:
+        arts = sync_articles(args.full)
     lst = sorted(arts.values(), key=lambda a: (a["date"], a["url"]), reverse=True)
     save(NEWS, lst)
     groups = group_summaries(lst)
