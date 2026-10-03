@@ -1,0 +1,21 @@
+name: update-news
+on:
+  schedule: [{cron: "17 */3 * * *"}]   # 3時間ごとに新着チェック
+  workflow_dispatch:
+    inputs: {full: {description: "全件取得し直す", type: boolean, default: false}}
+permissions: {contents: write}
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install -r requirements.txt
+      - run: python -m newsapp.update ${{ inputs.full && '--full' || '' }}
+        env: {ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}"}
+      - name: commit
+        run: |
+          git config user.name "news-bot"; git config user.email "bot@users.noreply.github.com"
+          git add data web/data.json
+          git diff --cached --quiet || (git commit -m "update news" && git push)
