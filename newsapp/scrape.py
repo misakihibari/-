@@ -184,6 +184,19 @@ def diagnose() -> None:
         t = sc.string or ""
         if re.search(r"ajax|wp-json|load.?more|paged", t, re.I):
             print(t[:300].replace("\n", " "))
+    for n in (6, 7, 30, 63):
+        url = f"{LIST_URL}page/{n}/"
+        try:
+            r = requests.get(url, headers=UA, timeout=30)
+        except requests.RequestException as e:
+            print(url, "ERR", e)
+            continue
+        sp = BeautifulSoup(r.text, "html.parser")
+        main = sp.find("main") or sp.body
+        print(f"=== {url} status={r.status_code} len={len(r.text)} title={sp.title.string if sp.title else ''}")
+        print("main text:", main.get_text(" ", strip=True)[:500])
+        for a in main.find_all("a", href=True)[:25]:
+            print("  a:", a["href"], "|", a.get_text(" ", strip=True)[:50])
     for url in (f"{BASE}/wp-json/wp/v2/posts?per_page=1", f"{LIST_URL}page/2/", f"{LIST_URL}2014/"):
         try:
             r = requests.get(url, headers=UA, timeout=30)
