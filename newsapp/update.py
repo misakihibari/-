@@ -18,7 +18,7 @@ from . import scrape, summarize
 ROOT = Path(__file__).resolve().parent.parent
 NEWS = ROOT / "data" / "news.json"
 GROUPS = ROOT / "data" / "group_summaries.json"
-OUT = ROOT / "web" / "data.json"
+OUT = ROOT / "docs" / "data.json"
 
 
 def load(p: Path, default):
