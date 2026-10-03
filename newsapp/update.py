@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import time
 from collections import defaultdict
 from pathlib import Path
 
@@ -37,9 +38,14 @@ def sync_articles(full: bool) -> dict[str, dict]:
     for m in metas:
         if m["url"] in arts:
             continue
-        a = scrape.fetch_article(m["url"], s)
+        try:
+            a = scrape.fetch_article(m["url"], s)
+        except requests.RequestException as e:
+            print(f"  skip article {m['url']}: {e}")
+            continue
+        time.sleep(0.3)
         a["title"] = a["title"] or m["title"]
-        a["date"] = a["date"] or m["date"]
+        a["date"] = m["date"] or a["date"]  # 一覧の日付を優先
         if not a["date"]:
             continue
         a["summary"] = summarize.summarize_article(a["title"], a["body"])
