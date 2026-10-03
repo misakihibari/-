@@ -65,7 +65,7 @@ def summarize_article(title: str, body: str) -> tuple[str, str]:
         f"# {title}\n{body[:12000]}")
     text = ""
     for _ in range(3):
-        text = re.sub(r"\s+", "", _claude(prompt))
+        text = re.sub(r"\s+", " ", _claude(prompt)).strip()
         if MIN_CHARS <= len(text) <= MAX_CHARS:
             return text, "ai"
         prompt += f"\n\n(前回は{len(text)}文字でした。必ず{MIN_CHARS}〜{MAX_CHARS}文字にしてください)"

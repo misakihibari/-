@@ -67,6 +67,8 @@ def group_summaries(articles: list[dict]) -> dict[str, dict]:
         sig = hashlib.sha1(("|".join(sorted(urls)) + str(summarize.has_ai())).encode()).hexdigest()
         if cache.get(key, {}).get("sig") == sig and cache[key].get("summary"):
             out[key] = cache[key]
+        elif not summarize.has_ai() and cache.get(key, {}).get("summary"):
+            out[key] = {"sig": sig, "summary": cache[key]["summary"]}  # AIなし: 前回の要約を残す
         else:
             out[key] = {"sig": sig, "summary": summarize.summarize_group(label, lines)}
 
@@ -91,8 +93,7 @@ def main():
     if args.resummarize:
         arts = {a["url"]: a for a in load(NEWS, [])}
         # AI要約済みの記事は飛ばす(途中で止まっても再実行で続きから)
-        todo = [a for a in arts.values() if summarize.has_ai() and a.get("summary_src") != "ai"
-                or not summarize.has_ai() and a.get("summary_src") != "extract"]
+        todo = [a for a in arts.values() if a.get("summary_src") != "ai"]
         print(f"summarizing {len(todo)} / {len(arts)} articles (ai={summarize.has_ai()})")
         summarize.summarize_many(todo)
     else:
