@@ -34,6 +34,7 @@ def save(p: Path, obj):
 def sync_articles(full: bool) -> dict[str, dict]:
     arts = {} if full else {a["url"]: a for a in load(NEWS, [])}
     s = requests.Session()
+    fresh: list[dict] = []
     metas = scrape.crawl_list(s, known=set(arts), stop_when_known=not full and bool(arts))
     for m in metas:
         if m["url"] in arts:
@@ -48,25 +49,34 @@ def sync_articles(full: bool) -> dict[str, dict]:
         a["date"] = m["date"] or a["date"]  # 一覧の日付を優先
         if not a["date"]:
             continue
-        a["summary"] = summarize.summarize_article(a["title"], a["body"])
         arts[a["url"]] = a
+        fresh.append(a)
+    summarize.summarize_many(fresh)
     return arts
 
 
 def group_summaries(articles: list[dict]) -> dict[str, dict]:
+    """月ごとに記事要約からまとめ、年ごとには月の要約をまとめる(キャッシュ: 記事構成が変わった期間のみ再生成)。"""
     cache = load(GROUPS, {})
     buckets = defaultdict(list)
     for a in articles:
-        buckets[a["date"][:4]].append(a)
         buckets[a["date"][:7]].append(a)
-    out = {}
-    for key, items in sorted(buckets.items()):
-        sig = hashlib.sha1("|".join(sorted(i["url"] for i in items)).encode()).hexdigest()
-        if cache.get(key, {}).get("sig") == sig:  # 記事構成が変わった期間だけ再要約
+    out: dict[str, dict] = {}
+
+    def make(key: str, label: str, urls: list[str], lines: list[str]):
+        sig = hashlib.sha1(("|".join(sorted(urls)) + str(summarize.has_ai())).encode()).hexdigest()
+        if cache.get(key, {}).get("sig") == sig and cache[key].get("summary"):
             out[key] = cache[key]
         else:
-            label = f"{key[:4]}年" + (f"{int(key[5:])}月" if len(key) > 4 else "")
-            out[key] = {"sig": sig, "summary": summarize.summarize_group(label, sorted(items, key=lambda i: i["date"]))}
+            out[key] = {"sig": sig, "summary": summarize.summarize_group(label, lines)}
+
+    for key, items in sorted(buckets.items()):
+        items.sort(key=lambda i: i["date"])
+        make(key, f"{key[:4]}年{int(key[5:])}月", [i["url"] for i in items], [f"{i['date']} {i['summary']}" for i in items])
+    for y in sorted({k[:4] for k in buckets}):
+        months = [k for k in sorted(buckets) if k.startswith(y)]
+        make(y, f"{y}年", [i["url"] for k in months for i in buckets[k]],
+             [f"{int(k[5:])}月: {out[k]['summary']}" for k in months if out[k]["summary"]])
     return out
 
 
@@ -80,9 +90,11 @@ def main():
         return scrape.diagnose()
     if args.resummarize:
         arts = {a["url"]: a for a in load(NEWS, [])}
-        for a in arts.values():
-            a["summary"] = summarize.summarize_article(a["title"], a["body"])
-        GROUPS.unlink(missing_ok=True)  # 月・年の要約も作り直す
+        # AI要約済みの記事は飛ばす(途中で止まっても再実行で続きから)
+        todo = [a for a in arts.values() if summarize.has_ai() and a.get("summary_src") != "ai"
+                or not summarize.has_ai() and a.get("summary_src") != "extract"]
+        print(f"summarizing {len(todo)} / {len(arts)} articles (ai={summarize.has_ai()})")
+        summarize.summarize_many(todo)
     else:
         arts = sync_articles(args.full)
     lst = sorted(arts.values(), key=lambda a: (a["date"], a["url"]), reverse=True)
