@@ -67,14 +67,17 @@ def group_summaries(articles: list[dict]) -> dict[str, dict]:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--full", action="store_true")
+    ap.add_argument("--diagnose", action="store_true")
     args = ap.parse_args()
+    if args.diagnose:
+        return scrape.diagnose()
     arts = sync_articles(args.full)
     lst = sorted(arts.values(), key=lambda a: (a["date"], a["url"]), reverse=True)
     save(NEWS, lst)
     groups = group_summaries(lst)
     save(GROUPS, groups)
     save(OUT, {"articles": lst, "groups": {k: v["summary"] for k, v in groups.items()}})
-    print(f"{len(lst)} articles")
+    print(f"{len(lst)} articles, oldest={lst[-1]['date'] if lst else '-'}")
 
 
 if __name__ == "__main__":
