@@ -1,7 +1,7 @@
 from newsapp import scrape, update
 
-LIST = """<ul><li><a href="/news/2026/09/30/abc/"><time datetime="2026-09-30">2026.09.30</time> 新サービス開始</a></li>
-<li><span>2025年3月1日</span><a href="/news/2025/03/01/x/">決算のお知らせ</a></li></ul>
+LIST = """<ul><li><a href="/news/15175/"><time datetime="2026-09-30">2026.09.30</time> 新サービス開始</a></li>
+<li><span>2025年3月1日</span><a href="/news/12890/">決算のお知らせ</a></li></ul>
 <a href="/news/page/2/">2</a><a href="/news/">一覧</a>"""
 ART = "<html><body><nav>menu</nav><article><h1>新サービス開始</h1><time datetime='2026-09-30'></time><p>本日開始しました。詳細は以下の通りです。</p></article></body></html>"
 
@@ -38,3 +38,22 @@ def test_crawl_probes_numbered_pages(monkeypatch):
     monkeypatch.setattr(scrape.time, "sleep", lambda _: None)
     got = scrape.crawl_list()
     assert {g["date"] for g in got} == {"2025-01-01", "2014-01-09"}
+
+
+def test_short_ids_and_external_links():
+    html = """<nav><a href="/news/category/media/">メディア</a><a href="/news/date/2026/">2026</a></nav>
+    <a href="https://hd.gmotech.jp/news/7462/">2025.08.29 プレスリリース 港区共催セミナー</a>
+    <a href="https://gmoretech.com/news20250807/">2025.08.07 プレスリリース 東海エリア導入</a>
+    <a href="https://x.com/gmotech_pr">公式X</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://hd.gmotech.jp/news/14683/">share</a>"""
+    items, _ = scrape.parse_list(html, "https://hd.gmotech.jp/news/page/7/")
+    assert sorted(i["date"] for i in items) == ["2025-08-07", "2025-08-29"]
+
+
+def test_extractive_skips_header_and_title():
+    from newsapp.summarize import extractive
+    title = "GMO TECHとGMOトライハッチが合併 MEO事業を統合"
+    body = "\n".join(["2026年10月1日", "報道関係各位", "GMO TECHホールディングス株式会社", title,
+                      "GMO TECHとGMOトライハッチは本日、合併しました。両社の知見を結集します。"])
+    out = extractive(body, title)
+    assert out.startswith("GMO TECHとGMOトライハッチは本日") and "報道関係" not in out

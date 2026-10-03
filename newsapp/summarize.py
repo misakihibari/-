@@ -7,8 +7,24 @@ import re
 MODEL = os.environ.get("SUMMARY_MODEL", "claude-haiku-4-5-20251001")
 
 
-def extractive(text: str, n: int = 3, limit: int = 400) -> str:
-    sents = [s.strip() for s in re.split(r"(?<=[。.!?！？])\s*|\n+", text) if len(s.strip()) > 8]
+_HEADER = re.compile(r"^(報道関係各位|お客様各位|関係各位|各位|プレスリリース|ニュースリリース)")
+_DATE = re.compile(r"^(19|20)\d{2}\s*[年./]\s*\d{1,2}\s*[月./]\s*\d{1,2}\s*日?$")
+
+
+def _boilerplate(line: str, title: str) -> bool:
+    t = re.sub(r"\s+", "", line)
+    nt = re.sub(r"\s+", "", title)
+    if not t or _HEADER.match(t) or _DATE.match(t):
+        return True
+    if t in nt or nt in t:  # タイトルの重複
+        return True
+    return len(t) <= 30 and bool(re.fullmatch(r"(株式会社)?[\w・&＆\-]+(株式会社|ホールディングス|\(.*\))?", t))
+
+
+def extractive(text: str, title: str = "", n: int = 3, limit: int = 300) -> str:
+    """見出し・日付・宛名・社名・タイトル重複を除き、最初の本文数文を返す。"""
+    lines = [l for l in text.split("\n") if not _boilerplate(l, title)]
+    sents = [s.strip() for s in re.split(r"(?<=[。.!?！？])\s*", " ".join(lines)) if len(s.strip()) > 8]
     out = " ".join(sents[:n])
     return out[:limit] + ("…" if len(out) > limit else "")
 
@@ -24,7 +40,7 @@ def _claude(prompt: str) -> str:
 def summarize_article(title: str, body: str) -> str:
     if os.environ.get("ANTHROPIC_API_KEY"):
         return _claude(f"次のニュースリリースを日本語で2〜3文に要約してください。要約のみ出力。\n\n# {title}\n{body[:8000]}")
-    return extractive(body)
+    return extractive(body, title)
 
 
 def summarize_group(label: str, articles: list[dict]) -> str:

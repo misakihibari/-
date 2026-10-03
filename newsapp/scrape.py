@@ -30,17 +30,14 @@ def parse_date(text: str) -> date | None:
         return None
 
 
-def _is_article_link(href: str) -> bool:
+def _is_article_link(href: str, text: str = "") -> bool:
+    """記事リンクか。自サイトは /news/<ID>/ 形式(IDは桁数不問)、
+    他ドメイン(gmoretech.com 等)へのリンクは、リンク文字が日付で始まる一覧項目のみ記事とみなす。"""
     p = urlparse(href)
-    if p.netloc and p.netloc != urlparse(BASE).netloc:
-        return False
-    path = p.path.rstrip("/")
-    if not path.startswith("/news/") or path == "/news":
-        return False
-    rest = path[len("/news/"):]
-    # ページネーション・カテゴリ・年別アーカイブは記事ではない
-    return not re.match(r"^(page|category|tag|archive|\d{4})(/|$)", rest) or bool(
-        re.match(r"^\d{4}/\d{2}/\d{2}/", rest))
+    if not p.netloc or p.netloc == urlparse(BASE).netloc:
+        return bool(re.fullmatch(r"/news/\d+/?", p.path))
+    return bool(re.match(r"\s*20\d{2}[./]\d{1,2}[./]\d{1,2}", text)) or bool(
+        re.match(r"\s*(19|20)\d{2}\s*[./]\s*\d", text))
 
 
 def parse_list(html: str, page_url: str) -> tuple[list[dict], list[str]]:
@@ -49,7 +46,7 @@ def parse_list(html: str, page_url: str) -> tuple[list[dict], list[str]]:
     items: dict[str, dict] = {}
     for a in soup.find_all("a", href=True):
         url = urljoin(page_url, a["href"]).split("#")[0]
-        if not _is_article_link(url):
+        if not _is_article_link(url, a.get_text(' ', strip=True)):
             continue
         d = None
         node = a
@@ -174,7 +171,7 @@ def diagnose() -> None:
     print("--- non-article links under /news or containing page/paged ---")
     for a in soup.find_all("a", href=True):
         h = a["href"]
-        if (("/news" in h) and not _is_article_link(urljoin(LIST_URL, h))) or "page" in h:
+        if (("/news" in h) and not _is_article_link(urljoin(LIST_URL, h), a.get_text(' ', strip=True))) or "page" in h:
             print(h, "|", a.get_text(" ", strip=True)[:40])
     print("--- pagination-like elements ---")
     for el in soup.select("[class*=pag], [class*=more], [class*=load], nav"):
@@ -184,6 +181,19 @@ def diagnose() -> None:
         t = sc.string or ""
         if re.search(r"ajax|wp-json|load.?more|paged", t, re.I):
             print(t[:300].replace("\n", " "))
+    for n in (6, 7, 30, 63):
+        url = f"{LIST_URL}page/{n}/"
+        try:
+            r = requests.get(url, headers=UA, timeout=30)
+        except requests.RequestException as e:
+            print(url, "ERR", e)
+            continue
+        sp = BeautifulSoup(r.text, "html.parser")
+        main = sp.find("main") or sp.body
+        print(f"=== {url} status={r.status_code} len={len(r.text)} title={sp.title.string if sp.title else ''}")
+        print("main text:", main.get_text(" ", strip=True)[:500])
+        for a in main.find_all("a", href=True)[:25]:
+            print("  a:", a["href"], "|", a.get_text(" ", strip=True)[:50])
     for url in (f"{BASE}/wp-json/wp/v2/posts?per_page=1", f"{LIST_URL}page/2/", f"{LIST_URL}2014/"):
         try:
             r = requests.get(url, headers=UA, timeout=30)
