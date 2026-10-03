@@ -57,3 +57,33 @@ def test_extractive_skips_header_and_title():
                       "GMO TECHとGMOトライハッチは本日、合併しました。両社の知見を結集します。"])
     out = extractive(body, title)
     assert out.startswith("GMO TECHとGMOトライハッチは本日") and "報道関係" not in out
+
+
+def test_ai_summary_retries_until_length_ok(monkeypatch):
+    from newsapp import summarize
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "x")
+    replies = iter(["短い。", "あ" * 150])
+    monkeypatch.setattr(summarize, "_claude", lambda *a, **k: next(replies))
+    text, src = summarize.summarize_article("T", "本文" * 50)
+    assert src == "ai" and len(text) == 150
+
+
+def test_ai_summary_clips_when_always_too_long(monkeypatch):
+    from newsapp import summarize
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "x")
+    monkeypatch.setattr(summarize, "_claude", lambda *a, **k: "あ" * 300)
+    text, _ = summarize.summarize_article("T", "本文")
+    assert len(text) <= 200
+
+
+def test_groups_year_built_from_months(monkeypatch, tmp_path):
+    from newsapp import summarize, update
+    monkeypatch.setattr(update, "GROUPS", tmp_path / "g.json")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "x")
+    seen = []
+    monkeypatch.setattr(summarize, "summarize_group", lambda label, lines: seen.append((label, lines)) or f"S{label}")
+    arts = [{"url": "a", "title": "t", "date": "2026-09-30", "summary": "A要約"},
+            {"url": "b", "title": "t", "date": "2026-08-01", "summary": "B要約"}]
+    g = update.group_summaries(arts)
+    assert g["2026"]["summary"] == "S2026年"
+    assert seen[-1][1] == ["8月: S2026年8月", "9月: S2026年9月"]
