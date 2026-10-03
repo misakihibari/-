@@ -115,24 +115,81 @@ def _get(session: requests.Session, url: str) -> str:
 
 
 def crawl_list(session: requests.Session | None = None, known: set[str] = frozenset(),
-               max_pages: int = 200, stop_when_known: bool = False) -> list[dict]:
-    """一覧を巡回して記事メタを返す。stop_when_known=True なら既知記事のみのページで打ち切る(差分更新)。"""
+               max_pages: int = 500, stop_when_known: bool = False) -> list[dict]:
+    """一覧を巡回して記事メタを返す。stop_when_known=True なら既知記事のみのページで打ち切る(差分更新)。
+
+    リンクから辿れる一覧ページを先に巡回し、その後 /news/page/N/ を連番で試して取りこぼしを拾う。
+    """
     s = session or requests.Session()
     seen_pages, queue, found = set(), [LIST_URL], {}
+
+    def visit(url: str) -> list[str] | None:
+        """一覧1ページを処理。取得失敗(404等)なら None、成功なら新規記事URLのリスト。"""
+        seen_pages.add(url)
+        try:
+            items, pages = parse_list(_get(s, url), url)
+        except requests.RequestException as e:
+            print(f"  skip {url}: {e}")
+            return None
+        new = [i["url"] for i in items if i["url"] not in found]
+        for i in items:
+            found.setdefault(i["url"], i)
+        queue.extend(p for p in pages if p not in seen_pages and p not in queue)
+        dates = [i["date"] for i in items if i["date"]]
+        print(f"  {url}: {len(items)} items, {len(new)} new, oldest={min(dates) if dates else '-'}")
+        time.sleep(1)
+        return new
+
     while queue and len(seen_pages) < max_pages:
         url = queue.pop(0)
         if url in seen_pages:
             continue
-        seen_pages.add(url)
-        items, pages = parse_list(_get(s, url), url)
-        new = [i for i in items if i["url"] not in known]
-        for i in items:
-            found.setdefault(i["url"], i)
-        if stop_when_known and not new:
+        new = visit(url)
+        if stop_when_known and new is not None and not [u for u in new if u not in known]:
+            return list(found.values())
+
+    # 連番プローブ(リンク抽出で見つからないページ送りの救済)
+    n, misses = 2, 0
+    while len(seen_pages) < max_pages and misses < 2:
+        url = f"{LIST_URL}page/{n}/"
+        n += 1
+        if url in seen_pages:
+            continue
+        new = visit(url)
+        if new is None or not new:
+            misses += 1 if new is None else 2
+            continue
+        misses = 0
+        if stop_when_known and not [u for u in new if u not in known]:
             break
-        queue += [p for p in pages if p not in seen_pages and p not in queue]
-        time.sleep(1)
     return list(found.values())
+
+
+def diagnose() -> None:
+    """一覧ページの構造を出力(ページ送りの調査用)。"""
+    html = _get(requests.Session(), LIST_URL)
+    soup = BeautifulSoup(html, "html.parser")
+    items, pages = parse_list(html, LIST_URL)
+    print(f"articles on first page: {len(items)}; detected list pages: {pages}")
+    print("--- non-article links under /news or containing page/paged ---")
+    for a in soup.find_all("a", href=True):
+        h = a["href"]
+        if (("/news" in h) and not _is_article_link(urljoin(LIST_URL, h))) or "page" in h:
+            print(h, "|", a.get_text(" ", strip=True)[:40])
+    print("--- pagination-like elements ---")
+    for el in soup.select("[class*=pag], [class*=more], [class*=load], nav"):
+        print(str(el)[:400].replace("\n", " "))
+    print("--- script hints ---")
+    for sc in soup.find_all("script"):
+        t = sc.string or ""
+        if re.search(r"ajax|wp-json|load.?more|paged", t, re.I):
+            print(t[:300].replace("\n", " "))
+    for url in (f"{BASE}/wp-json/wp/v2/posts?per_page=1", f"{LIST_URL}page/2/", f"{LIST_URL}2014/"):
+        try:
+            r = requests.get(url, headers=UA, timeout=30)
+            print(url, r.status_code, len(r.text))
+        except requests.RequestException as e:
+            print(url, "ERR", e)
 
 
 def fetch_article(url: str, session: requests.Session | None = None) -> dict:

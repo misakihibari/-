@@ -18,7 +18,7 @@ from . import scrape, summarize
 ROOT = Path(__file__).resolve().parent.parent
 NEWS = ROOT / "data" / "news.json"
 GROUPS = ROOT / "data" / "group_summaries.json"
-OUT = ROOT / "web" / "data.json"
+OUT = ROOT / "docs" / "data.json"
 
 
 def load(p: Path, default):
@@ -67,14 +67,17 @@ def group_summaries(articles: list[dict]) -> dict[str, dict]:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--full", action="store_true")
+    ap.add_argument("--diagnose", action="store_true")
     args = ap.parse_args()
+    if args.diagnose:
+        return scrape.diagnose()
     arts = sync_articles(args.full)
     lst = sorted(arts.values(), key=lambda a: (a["date"], a["url"]), reverse=True)
     save(NEWS, lst)
     groups = group_summaries(lst)
     save(GROUPS, groups)
     save(OUT, {"articles": lst, "groups": {k: v["summary"] for k, v in groups.items()}})
-    print(f"{len(lst)} articles")
+    print(f"{len(lst)} articles, oldest={lst[-1]['date'] if lst else '-'}")
 
 
 if __name__ == "__main__":

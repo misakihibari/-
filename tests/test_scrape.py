@@ -21,3 +21,20 @@ def test_groups(tmp_path, monkeypatch):
     monkeypatch.setattr(update, "GROUPS", tmp_path / "g.json")
     g = update.group_summaries([{"url": "u", "title": "T", "date": "2026-09-30", "summary": "s"}])
     assert set(g) == {"2026", "2026-09"}
+
+
+def test_crawl_probes_numbered_pages(monkeypatch):
+    pages = {
+        "https://hd.gmotech.jp/news/": '<a href="/news/1/">2025.01.01 A</a>',
+        "https://hd.gmotech.jp/news/page/2/": '<a href="/news/2/">2014.01.09 B</a>',
+    }
+    import requests
+
+    def fake(_s, url):
+        if url not in pages:
+            raise requests.HTTPError("404")
+        return pages[url]
+    monkeypatch.setattr(scrape, "_get", fake)
+    monkeypatch.setattr(scrape.time, "sleep", lambda _: None)
+    got = scrape.crawl_list()
+    assert {g["date"] for g in got} == {"2025-01-01", "2014-01-09"}
