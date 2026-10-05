@@ -93,51 +93,63 @@
  },
  "2012-01": {
   "sig": "1fb66502d1a819124cc799402b418564b833bd7c",
-  "summary": "・[APP]アルバイト情報アプリ「アルバイトナウ！Androidアプリ」提供開始"
+  "summary": "・Android向けアルバイト情報アプリ「アルバイトナウ！」を提供開始",
+  "manual": true
  },
  "2012-02": {
   "sig": "88c8e0afa97a806c64cfa8c9869a9b1ec687b02e",
-  "summary": "・[APP]クーポングルメ情報アプリ「ぐるれびゅー Androidアプリ」提供開始"
+  "summary": "・Android向けグルメアプリ「ぐるれびゅー」を提供開始",
+  "manual": true
  },
  "2012-03": {
   "sig": "12ddae1b887b4bd3ab1face9afb42651f7cc3dd4",
-  "summary": "・[ご案内]採用情報ページ、リニューアルのお知らせ\n・[SEM]「『Facebook広告』運用サービスbyGMO」提供開始"
+  "summary": "・「Facebook広告」運用サービスを提供開始\n・採用情報ページをリニューアル",
+  "manual": true
  },
  "2012-04": {
   "sig": "e9a3178ef0c01aebe8a20d34074521191241937d",
-  "summary": "・[APP]スマートフォン向けお得な3サービスを順次リリース\n・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました\n・[APP]有料アプリ・電子ギフトが貰える「タダアプリWEB by GMO」提供開始\n・[SEO・SMAAD]「Web＆モバイル マーケティング EXPO【春】」に出展"
+  "summary": "・有料アプリや電子ギフトが貰える「タダアプリ」関連の3サービスを提供開始\n・Web＆モバイル マーケティング EXPO【春】への出展とSEOレポートの掲載を案内",
+  "manual": true
  },
  "2012-05": {
   "sig": "2c81753c0d44f6bd7dee449bd95375b6cdb9be42",
-  "summary": "・[SMAAD]SponsorPayとスマートフォン向け広告配信事業において業務提携\n・[SEO]「SEO女子ブログ byGMO」開始\n・[APP]「セール＆無料のお得アプリ byGMO」提供開始"
+  "summary": "・欧州最大手のリワードネットワークSponsorPayと業務提携し、世界100か国以上へ広告配信\n・「セール＆無料のお得アプリ」を提供開始し、「SEO女子ブログ」を開始\n・Web＆モバイル マーケティング EXPO【春】への出展を案内",
+  "manual": true
  },
  "2012-06": {
   "sig": "6c3cc18dbfe3a2b44448e6e281f80930b8b5cbf9",
-  "summary": "・[APP]「アルバイトナウ！スマートフォン版」提供開始\n・[ご案内]「『Facebook広告』運用サービス byGMO」サイトリニューアル\n・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました\n・[APP]クーポングルメ情報アプリ「グルメ検索 ぐるれびゅー」提供開始"
+  "summary": "・iPhone向けクーポン付きグルメアプリ「ぐるれびゅー」と、「アルバイトナウ！スマートフォン版」を提供開始\n・「Facebook広告」運用サービスのサイトをリニューアル\n・SEOレポート「ペンギンアップデート」が掲載",
+  "manual": true
  },
  "2012-07": {
   "sig": "faa6e8fdd957c258056fb509c7772bddf35597db",
-  "summary": "・[APP]「アルバイトナウ！iPhoneアプリ」提供開始\n・[ご案内]夏季休暇についてのお知らせ\n・[ASO]アプリストア検索結果の上位表示施策サービス（ASO）開始\n・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました\n・[SEO]新プラン「Googleパンダアップデート対応SEO」開始"
+  "summary": "・Googleパンダアップデート対応のSEOプランと、アプリストア検索結果最適化サービスを提供開始\n・iPhone向けアルバイト情報アプリ「アルバイトナウ！」を提供開始\n・SEOレポートの掲載と夏季休暇を案内",
+  "manual": true
  },
  "2012-08": {
   "sig": "256069f8fbe7a0c05c2df5f30c65c0bf175beec3",
-  "summary": "・[SmaAD]「GMO SmaAD アドネットワーク」「GMO SmaAD リワード」開始\n・[APP]Android端末向け中古車情報アプリ 「中古車ナウ！アプリ」提供開始\n・[SmaAD]「GMO SmaAD」、LTV測定機能を提供開始"
+  "summary": "・「GMO SmaAD」にLTV測定機能を追加\n・Android向け中古車情報アプリ「中古車ナウ！」を提供開始\n・「GMO SmaAD アドネットワーク」「リワード」の開始を案内",
+  "manual": true
  },
  "2012-09": {
   "sig": "2a35a736d6651d1e660efc243eed105a5dfac0cc",
-  "summary": "・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました"
+  "summary": "・SEOレポート「Googleに評価される記事の書き方」が掲載",
+  "manual": true
  },
  "2012-10": {
   "sig": "cec2b2e9d08e3dbe8d402dbb2788f6af0f725a0c",
-  "summary": "・[SEO・ASO]「Web＆モバイル マーケティング EXPO【秋】」に出展\n・[SmaAD]「ad:tech tokyo　2012」に出展\n・[ASO]完全成果報酬型の「ASO Airlines byGMO」提供開始\n・[APP]「チョコバットスタジアム　～ホームラン王への道～」提供開始"
+  "summary": "・成果報酬型のアプリストア検索最適化「ASO Airlines byGMO」を提供開始\n・iPhone向けゲーム「チョコバットスタジアム」を提供開始\n・ad:tech Tokyoと、Web＆モバイル マーケティング EXPOへの出展を案内",
+  "manual": true
  },
  "2012-11": {
   "sig": "6e9db5040ce434417ad76a380d0123101d3b43c6",
-  "summary": "・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました"
+  "summary": "・SEOレポート「Google新アルゴリズムへの対策」が掲載",
+  "manual": true
  },
  "2012-12": {
   "sig": "1fdd1e9661fb28f215b5093a6c5b2507e4d620df",
-  "summary": "・[SmaAD]「GMO SmaAD」、「Unity」で開発されたアプリに対応\n・[ご案内]冬期休暇についてのお知らせ\n・[SmaAD]ウェブ上からメディア・開発者様のアカウント発行が可能に\n・[APP]不動産情報アプリ「SUMAII Androidアプリ」提供開始\n・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました"
+  "summary": "・「GMO SmaAD」がUnity製アプリに対応し、Webからメディアのアカウントを自動発行できる機能を追加\n・Android向け不動産情報アプリ「SUMAII」を提供開始\n・SEOレポートの掲載と冬期休暇を案内",
+  "manual": true
  },
  "2013-02": {
   "sig": "c41c4f8af88b661c58a6f0be5f285248d4820ce7",
@@ -948,7 +960,8 @@
  },
  "2012": {
   "sig": "c294f3f3c8f5b35276b021dae85483aa851e30a3",
-  "summary": "・[APP]アルバイト情報アプリ「アルバイトナウ！Androidアプリ」提供開始\n・[APP]クーポングルメ情報アプリ「ぐるれびゅー Androidアプリ」提供開始\n・[ご案内]採用情報ページ、リニューアルのお知らせ\n・[SEM]「『Facebook広告』運用サービスbyGMO」提供開始\n・[APP]スマートフォン向けお得な3サービスを順次リリース\n・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました\n・[APP]有料アプリ・電子ギフトが貰える「タダアプリWEB by GMO」提供開始"
+  "summary": "・スマホ向け広告「GMO SmaAD」を拡充し、LTV測定やUnity対応、SponsorPayとの提携で海外配信も始めた。\n・アプリストア検索最適化の「ASO」や、Googleのアルゴリズム変更に対応したSEOプランも提供した。\n・不動産や中古車、アルバイト、グルメ、お得アプリなどのスマホアプリを多数公開し、Facebook広告の運用代行も始めた。",
+  "manual": true
  },
  "2013": {
   "sig": "41b79b0460f87dcb844cd80fb2d8942c115f804b",
