@@ -185,39 +185,48 @@
  },
  "2014-01": {
   "sig": "c909d160db0e02ab96b38445244fbc8cc3e519de",
-  "summary": "・[ご案内]「Facebook」&自社サイト集客アップセミナーを開催\n・[APP] iPhone®、iPad®向け結婚式場検索アプリ 「結婚レシピ」提供開始"
+  "summary": "・iPhone・iPad向け結婚式場検索アプリ「結婚レシピ」を提供開始\n・Facebookと自社サイトによる集客改善セミナーを案内",
+  "manual": true
  },
  "2014-03": {
   "sig": "2d0d1ccd3afeb193fa145bca7ecea269a5cf9822",
-  "summary": "・[APP] Android®向け結婚式場検索アプリ 「結婚レシピ」提供開始"
+  "summary": "・Android向け結婚式場検索アプリ「結婚レシピ」を提供開始",
+  "manual": true
  },
  "2014-04": {
   "sig": "3b6a367a114f4204fc230bd607231a66c10fc48f",
-  "summary": "・[ご案内]集客から効果測定まで　「GMOソーシャルメディアサポート」提供開始"
+  "summary": "・ソーシャルメディア運用を一括支援する「GMOソーシャルメディアサポート」を提供開始",
+  "manual": true
  },
  "2014-07": {
   "sig": "8bf7040057e04bc9cf4cee359f7d2e019cfc0f9f",
-  "summary": "・【ご案内】夏季休暇についてのお知らせ"
+  "summary": "・夏季休暇（8月11日〜15日）を案内",
+  "manual": true
  },
  "2014-08": {
   "sig": "f158336b421c8d567a3f26135132735afc03dbe5",
-  "summary": "・[SmaAD]「Gamescom 2014」に GMO SmaADを出展"
+  "summary": "・ドイツ「Gamescom 2014」へ「GMO SmaAD」を出展\n・夏季休暇を案内",
+  "manual": true
  },
  "2014-09": {
   "sig": "ee2afe6943fcd750e83890aed419d9a61f8de7f9",
-  "summary": "・店舗や施設専用のO2Oアプリが簡単に作れる「GMO AppCapsule」提供開始\n・簡単に店舗独自のスマホアプリが作れる「GMO AppCapsule」\n・[SmaAD]「ad:tech tokyo 2014」に出展\n・店舗のO2Oアプリが作れる「GMO AppCapsule」、パートナー制度を開始\n・「GMO AppCapsule」 「販売代理店パートナー」「OEMパートナー」を募集開始"
+  "summary": "・店舗向けO2Oアプリ作成ASP「GMO AppCapsule」を9月1日に提供開始し、各メディアが紹介\n・販売代理店とOEMのパートナー制度を新設\n・「ad:tech tokyo 2014」への出展を案内",
+  "manual": true
  },
  "2014-10": {
   "sig": "004fb5511a3fdaafead970f411f14f726a70505b",
-  "summary": "・GMOAppCapsule「第4回Web＆モバイルマーケティングEXPO【秋】」に出展\n・GMOAppCapsule 「Beacon」に対応「GMOAppCapsuleチェックイン」を提供"
+  "summary": "・「GMO AppCapsule」がBeaconに対応し、来店時にクーポンを自動配信する「チェックイン」を提供\n・Web＆モバイル マーケティング EXPO【秋】への出展を案内",
+  "manual": true
  },
  "2014-11": {
   "sig": "233b579a854baa7b8f79e364e24b36951a0fd305",
-  "summary": "・[SmaAD]「G-STAR 2014」に GMO SmaADを出展\n・[東京証券取引所マザーズ市場への上場承認に関するお知らせ]"
+  "summary": "・東証マザーズ市場への上場承認を受けた\n・韓国最大のゲームショー「G-STAR 2014」へ「GMO SmaAD」を出展",
+  "manual": true
  },
  "2014-12": {
   "sig": "6fa4b227277d124b3e295816acaf01638b0a8476",
-  "summary": "・[東京証券取引所マザーズ市場への上場に関するお知らせ]\n・[ご案内]冬期休暇についてのお知らせ\n・「GMO AppCapsule」がスマホでクレジットカード決済ができる「GMO Pallet」と連携開始"
+  "summary": "・東京証券取引所マザーズ市場へGMO TECHが上場\n・「GMO AppCapsule」がスマホ決済「GMO Pallet」と連携し、アプリ上でクレジットカード決済に対応\n・冬期休暇を案内",
+  "manual": true
  },
  "2015-01": {
   "sig": "a9632025aec971a89e40f8a86a483e2a74212d30",
@@ -936,7 +945,8 @@
  },
  "2014": {
   "sig": "fb0270c70ca6472f584049e264b2625a7e28aea7",
-  "summary": "・[ご案内]「Facebook」&自社サイト集客アップセミナーを開催\n・[APP] iPhone®、iPad®向け結婚式場検索アプリ 「結婚レシピ」提供開始\n・[APP] Android®向け結婚式場検索アプリ 「結婚レシピ」提供開始\n・[ご案内]集客から効果測定まで　「GMOソーシャルメディアサポート」提供開始\n・【ご案内】夏季休暇についてのお知らせ\n・[SmaAD]「Gamescom 2014」に GMO SmaADを出展\n・店舗や施設専用のO2Oアプリが簡単に作れる「GMO AppCapsule」提供開始"
+  "summary": "・9月に店舗向けO2Oアプリ作成ASP「GMO AppCapsule」を始め、Beacon連携やGMO Palletによる決済連携、販売代理店制度で機能と販路を広げた。\n・12月に東証マザーズへ上場した。\n・「GMO SmaAD」は韓国やドイツなど海外のゲーム展示会に出展した。\n・ソーシャルメディア支援や結婚式場検索アプリ「結婚レシピ」も提供した。",
+  "manual": true
  },
  "2015": {
   "sig": "ba4ae07be629d0a61e975a9e213c4d6dca3fff52",
