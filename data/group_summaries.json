@@ -141,47 +141,58 @@
  },
  "2013-02": {
   "sig": "c41c4f8af88b661c58a6f0be5f285248d4820ce7",
-  "summary": "・[ご案内]GMO TECH採用情報ページ、リニューアルのお知らせ\n・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました\n・[SmaAD]「Mobile World Congress 2013 in バルセロナ」に出展"
+  "summary": "・新卒採用2014サイトをオープン\n・世界最大のモバイル見本市「Mobile World Congress 2013」へ出展\n・SEOレポート「アルゴリズム変動に左右されないSEO【内部施策編】」が掲載",
+  "manual": true
  },
  "2013-03": {
   "sig": "16592e08cbc5cd652884725b9fa3a6e06beda4d0",
-  "summary": "・[SmaAD]「セッションID」を用いたCPA成果計測に対応\n・[SmaAD]「Adobe AIR」で開発されたアプリの成果計測に対応\n・[SmaAD]「Game Developers Conference 2013」に出展\n・[SmaAD]GMO SmaADのWebサイトリニューアルのお知らせ\n・[ご案内]GMO TECH株式会社　役員人事異動のお知らせ\n・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました"
+  "summary": "・「GMO SmaAD」がAdobe AIRとセッションIDによるCPA計測に対応し、Webサイトを英語版も含めてリニューアル\n・役員人事を発表\n・Game Developers Conference 2013に出展",
+  "manual": true
  },
  "2013-04": {
   "sig": "f87a5f57130662ad253bcec6be1b471a0343fe37",
-  "summary": "・[ご案内]4月18日（木）災害対策訓練による在宅勤務のお知らせ"
+  "summary": "・災害対策訓練として、4月18日に在宅勤務訓練を実施",
+  "manual": true
  },
  "2013-05": {
   "sig": "8e9658e163ed2cfc7ed5391dd54e32b5d5acb535",
-  "summary": "・[SmaAD]「GMO SmaAD ASO」提供開始\n・[ご案内]弊社SEM事業部　田尻友行のSEOレポートが掲載されました\n・[SEO] Googleが「ペンギンアップデート2.0」を実施"
+  "summary": "・Googleのペンギンアップデート2.0の影響を連絡\n・Google Playの検索キーワード別にインストール数を計測できる「GMO SmaAD ASO」を提供開始\n・SEOレポート「Googleの理念と普遍的なアルゴリズム」が掲載",
+  "manual": true
  },
  "2013-06": {
   "sig": "68ff66a805b9c6b4a710d2e8107ab8961cfd7066",
-  "summary": "・[ご案内]女性用インナー専門サイトSEENS Underwearをオープン"
+  "summary": "・女性用インナー専門の通販サイト「SEENS Underwear」をオープン",
+  "manual": true
  },
  "2013-07": {
   "sig": "a39aa76da287197d22d09464084391450f01f228",
-  "summary": "・[ご案内]弊社Webマーケティンクﾞ事業部　田尻のSEOレポートが掲載されました\n・[SmaAD]「GMO SmaADリワード」CPA方式オファーウォールをGREEへ提供\n・[ご案内]女性用インナー専門サイトSEENS Underwearスマホ版をオープン\n・[SmaAD]「GMO SmaAD」iPadへのセグメント配信が可能に\n・[ご案内]夏季休暇についてのお知らせ\n・[SmaAD]「GMO SmaADリワード」で「LINEフリーコイン」販売開始"
+  "summary": "・「GMO SmaADリワード」で「LINEフリーコイン」の販売を開始し、GREEへオファーウォールを提供\n・「GMO SmaAD」がiPadへのセグメント配信に国内で初めて対応\n・下着通販サイト「SEENS Underwear」のスマホ版を公開",
+  "manual": true
  },
  "2013-08": {
   "sig": "74cf6bbb62e522caede46f6fabe3e8bbcd85fab6",
-  "summary": "・[APP] Android版「RANKAPP」、「セール＆無料のお得アプリ」サービス終了\n・[APP] iPhone®、iPad®向け中古車情報アプリ 「中古車ナウ！アプリ」提供開始\n・[APP] iPhone®向け転職・求人情報一括検索アプリ 「FindWork」提供開始\n・[ご案内]弊社Webマーケティンクﾞ事業部　田尻のSEOレポートが掲載されました\n・[SmaAD]「GMO SmaAD」が「Corona SDK」開発アプリの成果計測に対応"
+  "summary": "・求人アプリ「FindWork」のiPhone版と、「中古車ナウ！アプリ」を提供開始\n・「GMO SmaAD」がCorona SDK製アプリの成果計測に対応\n・Android版の「RANKAPP」などのサービス終了と、夏季休暇を案内\n・SEOレポートが掲載",
+  "manual": true
  },
  "2013-09": {
   "sig": "6495d38e7b83bc957ee9b668bbb27eace8469075",
-  "summary": "・[SmaAD]「ad:tech tokyo2013」に出展"
+  "summary": "・世界最大級のデジタルマーケティングイベント「ad:tech tokyo 2013」へ出展",
+  "manual": true
  },
  "2013-10": {
   "sig": "b6e56366d03ac830c70430fdd4aa1b479c2d26ad",
-  "summary": "・[ご案内]弊社WEBマーケティング事業部　金子のSEOレポートが掲載されました\n・[SmaAD]「Web&モバイル マーケティング EXPO【秋】」に出展"
+  "summary": "・「Web&モバイル マーケティング EXPO【秋】」への出展を案内\n・SEOレポート「スマートフォンサイト最適化についてのよくある質問と回答」が掲載",
+  "manual": true
  },
  "2013-11": {
   "sig": "52d9cee0eb5e51a372ef4992bc0d27bb3a1da16d",
-  "summary": "・[SmaAD]「GMO SmaAD」が報奨金＆単価アップキャンペーンを実施\n・[APP]Android®向け転職・求人情報一括検索アプリ 「FindWork」提供開始\n・[APP] iPhone®向け女性の転職・求人検索アプリ「転職Princess」提供開始\n・[ご案内]弊社WEBマーケティング事業部　金子のSEOレポートが掲載されました\n・[SmaAD]Selvas社へマーケティング支援 RPGアプリ「セフィーラ」をサポート"
+  "summary": "・女性向けの転職アプリ「転職Princess」のiPhone版と、求人一括検索アプリ「FindWork」のAndroid版を提供開始\n・韓国Selvasのゲームのマーケティングを支援し、「GMO SmaAD」で報奨金キャンペーンを実施\n・SEOレポートが掲載",
+  "manual": true
  },
  "2013-12": {
   "sig": "e9d434400abc160e44785207454d02292b02c238",
-  "summary": "・[ご案内]冬季休暇についてのお知らせ\n・[ご案内]女性向け美容・コスメ情報サイト「CosmeHouse」をオープン\n・[ご案内] 女性向け恋愛・結婚情報サイト「結婚レシピ」をオープン\n・[APP]Android®向け女性の転職・求人検索アプリ「転職Princess」提供開始"
+  "summary": "・女性向けの転職アプリ「転職Princess」のAndroid版を提供開始\n・恋愛・結婚情報サイト「結婚レシピ」と、美容・コスメ情報サイト「CosmeHouse」をオープン\n・冬季休暇を案内",
+  "manual": true
  },
  "2014-01": {
   "sig": "c909d160db0e02ab96b38445244fbc8cc3e519de",
@@ -941,7 +952,8 @@
  },
  "2013": {
   "sig": "41b79b0460f87dcb844cd80fb2d8942c115f804b",
-  "summary": "・[ご案内]GMO TECH採用情報ページ、リニューアルのお知らせ\n・[ご案内]弊社SEM事業部　金子昌史のSEOレポートが掲載されました\n・[SmaAD]「Mobile World Congress 2013 in バルセロナ」に出展\n・[SmaAD]「セッションID」を用いたCPA成果計測に対応\n・[SmaAD]「Adobe AIR」で開発されたアプリの成果計測に対応\n・[SmaAD]「Game Developers Conference 2013」に出展\n・[SmaAD]GMO SmaADのWebサイトリニューアルのお知らせ"
+  "summary": "・スマホ向け広告配信サービス「GMO SmaAD」が、Adobe AIRやCorona SDK、iPad、セッションID計測に対応し、LINEフリーコインの販売やGREEへの提供も始めた。\n・転職・求人検索や中古車、結婚、美容など、メディア・アプリの提供を広げた。\n・SEO対策のレポート掲載やペンギンアップデートへの対応に力を入れ、海外展示会にも出展した。",
+  "manual": true
  },
  "2014": {
   "sig": "fb0270c70ca6472f584049e264b2625a7e28aea7",
