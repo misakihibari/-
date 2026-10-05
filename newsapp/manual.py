@@ -37,6 +37,8 @@ def _publish(arts: list[dict]):
 def _core(a: dict, limit: int) -> str:
     lines = [l.strip() for l in a["body"].split("\n") if not summarize._boilerplate(l, a["title"])]
     text = " ".join(lines)
+    if re.search(r"(.{20,60}?)\s+\1", text[:700]):  # 関連記事一覧を拾った(別ドメイン記事の取得不良)
+        return "[本文取得不良: タイトルから要約]"
     text = re.split(r"(会社名\s|【?会社概要|■?会社概要|お問い合わせ先|【本件に関するお問い合わせ|＜本件に関する)", text)[0]
     return text[:limit]
 
