@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4f6df5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="通知メモ">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" href="/icons/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+<title>通知メモ</title>
+</head>
+<body>
+<header class="top">
+  <h1>🔔 通知メモ</h1>
+  <button id="btn-push" class="chip" hidden></button>
+</header>
+<div id="push-help" class="notice" hidden></div>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="date" class="on">日程別</button>
+  <button data-tab="genre">ジャンル別</button>
+  <button data-tab="genres">ジャンル管理</button>
+</nav>
+
+<main id="main"></main>
+<button id="fab" class="fab" aria-label="通知を登録">＋</button>
+
+<dialog id="dlg"></dialog>
+<div id="toast" class="toast" hidden></div>
+<script src="/app.js" type="module"></script>
+</body>
+</html>

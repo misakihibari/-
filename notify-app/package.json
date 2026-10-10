@@ -1,0 +1,17 @@
+{
+  "name": "notify-memo",
+  "version": "1.0.0",
+  "description": "メモをスマホのロック画面・通知センター・バナーにプッシュ通知するWebアプリ",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test \"test/*.test.js\"",
+    "icons": "node scripts/make-icons.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "web-push": "^3.6.7"
+  }
+}
