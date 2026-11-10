@@ -1,0 +1,10 @@
+{
+  "name": "おはなし帳",
+  "short_name": "おはなし帳",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f2ec",
+  "theme_color": "#f7f2ec",
+  "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}
